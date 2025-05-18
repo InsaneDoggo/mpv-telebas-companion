@@ -1,14 +1,21 @@
-=================== Installation =================================
+Plugin (lua scripts) for [MPV Video Player](https://github.com/mpv-player/mpv)
+
+## Features
+
+- Smart(configurable) AudioTrack auto selection
+- Smart(configurable) Subtitles auto selection
+
+## Installation
 
 Put following files:
 
-/scripts
-/mpv.conf
+- /scripts
+- /mpv.conf
 
 into C:\Users\<username>\AppData\Roaming\mpv
 
 
-=================== Config =======================================
+## Config 
 
 Для настройки алгоритма выбора дорожек используйте:
 /scripts/telebas/core/config.lua
