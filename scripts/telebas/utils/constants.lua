@@ -1,5 +1,3 @@
-_G.INVALID_TITLE = "Undefined Title"
-_G.INVALID_ID = -1
 _G.DEFAULT_SCORE = 0
 
 _G.MPV = {

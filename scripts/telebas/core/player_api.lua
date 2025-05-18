@@ -34,7 +34,7 @@ function Player:SelectSubtitleTrack(id)
   mp.set_property_native(MPV.PROPERTY_SUBTITLE_ID, id)
 end
 
-function Player:IsSubtitle(track)
+function Player:IsSubtitleTrack(track)
   return track[MPV.TRACK.KEY_TYPE] == MPV.TRACK.TYPE_SUBTITLE
 end
 

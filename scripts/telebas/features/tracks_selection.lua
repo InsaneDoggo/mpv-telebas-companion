@@ -8,58 +8,60 @@ function HandleTracks()
 end
 
 function HandleAudioTracks(tracks)
-  Log("========================== Audio Tracks =============================")
+  Log("\n========================== Audio Tracks =============================")
 
   local bestScore = DEFAULT_SCORE
-  local winnerId = INVALID_ID
-  local winnerTitle = INVALID_TITLE
+  local winnerTrack = nil
 
   for _, track in ipairs(tracks) do
     if (Player:IsAudioTrack(track)) then
-      local trackId = track[MPV.TRACK.KEY_ID]
-      local trackTitle = tostring(track[MPV.TRACK.KEY_TITLE])
-
       local score = GetAudioTrackScore(track)
 
       if (score > bestScore) then
         bestScore = score
-        winnerId = trackId
-        winnerTitle = trackTitle
+        winnerTrack = track
       end
     end
   end
 
-  if (winnerId ~= INVALID_ID) then
-    Log(string.format("============== Audio Winner id: %d | Title: %s", winnerId, winnerTitle))
-    Player:SelectAudioTrack(winnerId)
+  if (winnerTrack) then
+    Log(string.format("\nAudio Winner id: %d | lang: %s | Title: %s",
+      winnerTrack[MPV.TRACK.KEY_ID],
+      tostring(winnerTrack[MPV.TRACK.KEY_LANG]),
+      tostring(winnerTrack[MPV.TRACK.KEY_TITLE])
+    ))
+    Player:SelectAudioTrack(winnerTrack[MPV.TRACK.KEY_ID])
   end
+
+  Log("==================================================================")
 end
 
 function HandleSubtitleTracks(tracks)
-  Log("========================== Subtitles =============================")
+  Log("\n========================== Subtitles =============================")
   local bestScore = DEFAULT_SCORE
-  local winnerId = INVALID_ID
-  local winnerTitle = INVALID_TITLE
+  local winnerTrack = nil
 
   for _, track in ipairs(tracks) do
-    if (Player:IsSubtitle(track)) then
-      local trackId = track[MPV.TRACK.KEY_ID]
-      local trackTitle = tostring(track[MPV.TRACK.KEY_TITLE])
-
+    if (Player:IsSubtitleTrack(track)) then
       local score = GetSubtitleScore(track)
 
       if (score > bestScore) then
         bestScore = score
-        winnerId = trackId
-        winnerTitle = trackTitle
+        winnerTrack = track
       end
     end
   end
 
-  if (winnerId ~= INVALID_ID) then
-    Log(string.format("============== Subtitle Winner id: %d | Title: %s", winnerId, winnerTitle))
-    Player:SelectSubtitleTrack(winnerId)
+  if (winnerTrack) then
+    Log(string.format("\nSubtitle Winner id: %d | lang: %s | Title: %s",
+      winnerTrack[MPV.TRACK.KEY_ID],
+      tostring(winnerTrack[MPV.TRACK.KEY_LANG]),
+      tostring(winnerTrack[MPV.TRACK.KEY_TITLE])
+    ))
+    Player:SelectSubtitleTrack(winnerTrack[MPV.TRACK.KEY_ID])
   end
+
+  Log("==================================================================")
 end
 
 function GetAudioTrackScore(track)
