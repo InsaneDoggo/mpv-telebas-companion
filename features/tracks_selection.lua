@@ -10,14 +10,14 @@ end
 function HandleAudioTracks(tracks)
   Log("========================== Audio Tracks =============================")
 
-  local bestScore = 0
-  local winnerId = -1
-  local winnerTitle = "Undefined Title"
+  local bestScore = DEFAULT_SCORE
+  local winnerId = INVALID_ID
+  local winnerTitle = INVALID_TITLE
 
   for _, track in ipairs(tracks) do
-    if (track["type"] == "audio") then
-      local trackId = track["id"]
-      local trackTitle = tostring(track["title"])
+    if (Player:IsAudioTrack(track)) then
+      local trackId = track[MPV.TRACK.KEY_ID]
+      local trackTitle = tostring(track[MPV.TRACK.KEY_TITLE])
 
       local score = GetAudioTrackScore(track)
 
@@ -29,7 +29,7 @@ function HandleAudioTracks(tracks)
     end
   end
 
-  if (winnerId ~= -1) then
+  if (winnerId ~= INVALID_ID) then
     Log(string.format("============== Audio Winner id: %d | Title: %s", winnerId, winnerTitle))
     Player:SelectAudioTrack(winnerId)
   end
@@ -37,14 +37,14 @@ end
 
 function HandleSubtitleTracks(tracks)
   Log("========================== Subtitles =============================")
-  local bestScore = 0
-  local winnerId = -1
-  local winnerTitle = "Undefined Title"
+  local bestScore = DEFAULT_SCORE
+  local winnerId = INVALID_ID
+  local winnerTitle = INVALID_TITLE
 
   for _, track in ipairs(tracks) do
-    if (track["type"] == "sub") then
-      local trackId = track["id"]
-      local trackTitle = tostring(track["title"])
+    if (Player:IsSubtitle(track)) then
+      local trackId = track[MPV.TRACK.KEY_ID]
+      local trackTitle = tostring(track[MPV.TRACK.KEY_TITLE])
 
       local score = GetSubtitleScore(track)
 
@@ -56,15 +56,15 @@ function HandleSubtitleTracks(tracks)
     end
   end
 
-  if (winnerId ~= -1) then
+  if (winnerId ~= INVALID_ID) then
     Log(string.format("============== Subtitle Winner id: %d | Title: %s", winnerId, winnerTitle))
     Player:SelectSubtitleTrack(winnerId)
   end
 end
 
 function GetAudioTrackScore(track)
-  local trackTitle = track["title"]
-  local trackLang = track["lang"]
+  local trackTitle = track[MPV.TRACK.KEY_TITLE]
+  local trackLang = track[MPV.TRACK.KEY_LANG]
 
   local score = 0
 
@@ -87,8 +87,8 @@ function GetAudioTrackScore(track)
 end
 
 function GetSubtitleScore(track)
-  local trackTitle = track["title"]
-  local trackLang = track["lang"]
+  local trackTitle = track[MPV.TRACK.KEY_TITLE]
+  local trackLang = track[MPV.TRACK.KEY_LANG]
 
   local score = 0
 

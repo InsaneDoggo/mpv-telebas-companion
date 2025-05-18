@@ -1,4 +1,5 @@
 require('utils.utils')
+require('utils.constants')
 require('utils.debug')
 
 require('core.config')
