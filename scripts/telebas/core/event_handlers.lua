@@ -8,7 +8,7 @@ end
 
 function OnStartFile()
   Log("[event] OnStartFile")
-  ApplyDebugResolution()
+  -- ApplyDebugResolution()
 end
 
 function OnFileLoaded()
