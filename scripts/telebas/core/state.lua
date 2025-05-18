@@ -1,5 +1,3 @@
 _G.Telebas = {
-  IS_DEBUG = true,
-
-  IsMediaFileHandled = false
+  IS_DEBUG = true
 }
